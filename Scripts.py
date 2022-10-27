@@ -23,26 +23,7 @@ class Sphere:
         self.pos = Rz(self.zTheta, self.pos)
 
     def display(self, screen, ref, base, dir, fov, width, height):
-        
-        for p in self.pos:
-            v = []
-            v.append(p[0]-ref[0])
-            v.append(p[1]-ref[1])
-            v.append(p[2]-ref[2])
-            xx = dotProduct(v, base[0])
-            yy = dotProduct(v, base[1])
-            zz = dotProduct(v, dir)
-            d = 1/(np.tan(fov/2))
-            rat = width/height
-
-            xp = (d*xx/zz)
-            yp = (d*yy/zz)
-            xp /= rat
-
-            xp = (xp+1)*width/2
-            yp = (yp+1)*height/2
-            if dotProduct(v, dir) > 0:
-                pygame.draw.circle(screen, (255, 255, 255), [xp, yp], 2)
+        display(self.pos, screen, ref, base, dir, fov, width, height)
 
 class Ground:
 
@@ -54,25 +35,31 @@ class Ground:
                 self.pos.append([i-10, j-10, 0])
 
     def display(self, screen, ref, base, dir, fov, width, height):
-        for p in self.pos:
-            v = []
-            v.append(p[0]-ref[0])
-            v.append(p[1]-ref[1])
-            v.append(p[2]-ref[2])
-            xx = dotProduct(v, base[0])
-            yy = dotProduct(v, base[1])
-            zz = dotProduct(v, dir)
-            d = 1/(np.tan(fov/2))
-            rat = width/height
+        display(self.pos, screen, ref, base, dir, fov, width, height)
 
-            xp = d*xx/zz
-            yp = d*yy/zz
-            xp /= rat
 
-            xp = (xp+1)*width/2
-            yp = (yp+1)*height/2
-            if dotProduct(v, dir) > 0:
-                pygame.draw.circle(screen, (255, 255, 255), [xp, yp], 2)
+def display(pos, screen, ref, base, dir, fov, width, height):
+
+    for p in pos:
+        v = []
+        v.append(p[0]-ref[0])
+        v.append(p[1]-ref[1])
+        v.append(p[2]-ref[2])
+        xx = dotProduct(v, base[0])
+        yy = dotProduct(v, base[1])
+        zz = dotProduct(v, dir)
+        d = 1/(np.tan(fov/2))
+        rat = width/height
+
+        xp = d*xx/zz
+        yp = d*yy/zz
+        xp /= rat
+
+        xp = (xp+1)*width/2
+        yp = (yp+1)*height/2
+        if dotProduct(v, dir) > 0:
+            pygame.draw.circle(screen, (255, 255, 255), [xp, yp], 2)
+
 
 def Rx(theta, pos):
     R = []

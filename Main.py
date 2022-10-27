@@ -42,13 +42,13 @@ class Simu():
             self.pos[2] += .05
         elif keys[pygame.K_SPACE]:
             self.pos[2] -= .05
-        elif keys[pygame.K_UP] or keys[pygame.K_z]:
+        if keys[pygame.K_UP] or keys[pygame.K_z]:
             v1 += .05
-        elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             v1 -= .05
-        elif keys[pygame.K_LEFT] or keys[pygame.K_q]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_q]:
             v2 += .05
-        elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             v2 -= .05
         self.pos[0] += np.cos(self.theta) * v1
         self.pos[1] += np.sin(self.theta) * v1
